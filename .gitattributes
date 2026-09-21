@@ -1,0 +1,25 @@
+# 统一换行符策略：仓库内一律 LF，避免在 Windows 上检出后产生整树 CRLF 噪音 diff。
+#
+# 背景：本 fork 的工作区曾被以 CRLF 检出，导致 375 个文件、约 6.7 万行的
+# "纯换行符"差异（git diff -w 为空），既无法 review 也无法干净提交功能改动。
+* text=auto eol=lf
+
+# Windows 批处理与 PowerShell 脚本必须保留 CRLF，否则可能无法执行。
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# 二进制资产不得参与换行符转换。
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.whl binary
+*.so binary
+*.pyd binary
+*.dll binary
+*.exe binary
